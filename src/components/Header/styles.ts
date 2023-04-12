@@ -27,11 +27,33 @@ export const Navbar = styled.nav`
 
 export const NavItems = styled.div<INav>`
   cursor: pointer;
+  position: relative;
 
   ${({disabled, theme}) => disabled && css`
     color: ${theme.lightGray};
     cursor: not-allowed;
   `};
+
+  ::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1rem;
+    width: 100%;
+    height: 4px;
+    background-color: ${({theme}) => theme.blue};
+    transform: scale(0);
+    transition: all .3s ease;
+    border-radius: 1rem;
+  }
+
+  :hover {
+    ${({disabled}) => !disabled && css`
+      ::after {
+        transform: scale(1);
+      }
+    `};
+  }
 `;
 
 export const HeaderActions = styled.div`
