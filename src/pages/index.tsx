@@ -1,9 +1,10 @@
+import ArticlesGroup from '@/components/ArticlesGroup';
 import RootLayout from '@/components/layouts/RootLayout';
 
 export default function Home() {
 	return (
 		<RootLayout>
-
+			<ArticlesGroup />
 		</RootLayout>
 	);
 }
