@@ -10,6 +10,7 @@ export const Button = styled.button`
   font-size: 1rem;
   cursor: pointer;
   transition: all .3s ease;
+  width: 100%;
 
   :hover {
     background-color: white;
