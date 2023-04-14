@@ -9,9 +9,20 @@ export const ArticleContainer = styled.article<Props>`
   max-height: 200px;
   margin-block: 1rem;
   gap: 1rem;
+  border-top: 2px solid ${({theme}) => theme.lightGray};
+  padding-block: 1rem;
   overflow: hidden;
 
-  ${({})}
+  ${({major}) => major && css`
+    width: 100%;
+    max-height: max-content;
+    flex-direction: column;
+    border-top: none;
+    ${ImageContainer} {
+      height: 300px;
+      max-width: 100%;
+    }
+  `}
 `;
 
 export const ImageContainer = styled.div`
@@ -19,6 +30,7 @@ export const ImageContainer = styled.div`
   img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 `;
 
