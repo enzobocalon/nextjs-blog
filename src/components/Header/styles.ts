@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 
 interface INav {
   disabled?: boolean;
@@ -27,7 +28,7 @@ export const Container = styled.header`
 
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
