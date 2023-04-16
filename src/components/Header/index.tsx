@@ -4,6 +4,7 @@ import { Button } from '../Button';
 import * as S from './styles';
 
 import { MdMenu } from 'react-icons/md';
+import Link from 'next/link';
 
 export default function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,12 +39,16 @@ export default function Header() {
 								</S.NavItems>
 							</S.Navbar>
 							<S.HeaderActions>
-								<S.NavItems>
-                  Login
-								</S.NavItems>
-								<Button>
+								<Link href={'/login'}>
+									<S.NavItems>
+										Login
+									</S.NavItems>
+								</Link>
+								<Link href={'/register'}>
+									<Button>
                   Register
-								</Button>
+									</Button>
+								</Link>
 							</S.HeaderActions>
 						</S.Wrapper>
 					)
