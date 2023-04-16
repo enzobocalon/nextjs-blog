@@ -46,8 +46,14 @@ export default function Form({isLogin}: Props) {
 				<S.FieldContainer>
 					<Button>{isLogin ? 'Login' : 'Register'}</Button>
 				</S.FieldContainer>
-				<Link href={'#'}>
-					<p>Doesn&apos;t have an account yet? Create one now!</p>
+				<Link href={isLogin ? '/register' : '/login'}>
+					{
+						isLogin ? (
+							<p>Doesn&apos;t have an account yet? Create one now!</p>
+						) : (
+							<p>Already have an account? Login now!</p>
+						)
+					}
 				</Link>
 			</S.Form>
 		</S.Container>
