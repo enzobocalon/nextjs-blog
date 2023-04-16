@@ -4,7 +4,7 @@ import RootLayout from '@/components/layouts/RootLayout';
 export default function Login() {
 	return (
 		<RootLayout>
-			<Form />
+			<Form isLogin/>
 		</RootLayout>
 	);
 }
