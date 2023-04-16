@@ -6,7 +6,6 @@ export const Input = styled.input`
   outline: none;
   border-radius: .25rem;
   background-color: white;
-  color: white;
   font-size: 1rem;
   font-family: inherit;
 `;
