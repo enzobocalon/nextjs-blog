@@ -1,11 +1,17 @@
 import ArticlesGroup from '@/components/ArticlesGroup';
 import RootLayout from '@/components/layouts/RootLayout';
+import Head from 'next/head';
 
 export default function Home() {
 	return (
-		<RootLayout>
-			<ArticlesGroup />
-		</RootLayout>
+		<>
+			<Head>
+				<title>Blog - Homepage</title>
+			</Head>
+			<RootLayout>
+				<ArticlesGroup />
+			</RootLayout>
+		</>
 	);
 }
 

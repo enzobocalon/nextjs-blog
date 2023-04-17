@@ -1,10 +1,16 @@
 import Form from '@/components/Form';
 import RootLayout from '@/components/layouts/RootLayout';
+import Head from 'next/head';
 
 export default function Register() {
 	return (
-		<RootLayout>
-			<Form />
-		</RootLayout>
+		<>
+			<Head>
+				<title>Register</title>
+			</Head>
+			<RootLayout>
+				<Form />
+			</RootLayout>
+		</>
 	);
 }
