@@ -63,5 +63,9 @@ export const BodyContainer = styled.div`
     max-width: 1440px;
     padding: 1rem;
     margin: 0 auto;
+
+    p {
+      line-height: 1.5rem;
+    }
 `;
 
