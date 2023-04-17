@@ -4,8 +4,6 @@ import 'easymde/dist/easymde.min.css';
 
 import dynamic from 'next/dynamic';
 import { Button } from '../Button';
-import Head from 'next/head';
-
 const SimpleMdeEditor = dynamic(
 	() => import('react-simplemde-editor'),
 	{ ssr: false }
@@ -25,31 +23,26 @@ export default function PostBox() {
 		};
 	}, []);
 	return (
-		<>
-			<Head>
-				<title>Blog - Create new Post</title>
-			</Head>
-			<S.Container>
-				<h1>Create new Post</h1>
-				<SimpleMdeEditor
-					value={value}
-					onChange={onChange}
-					options={autofocusNoSpellcheckerOptions} />
-				<S.EditorFooter>
-					<S.OptionsContainer>
-						<strong>Options</strong>
-						<S.Options>
-							<S.Option>
-								<input type='checkbox' name='allowComments' id='allowComments'/>
-								<label htmlFor='allowComments'>Allow Comments?</label>
-							</S.Option>
-						</S.Options>
-					</S.OptionsContainer>
-					<Button>
+		<S.Container>
+			<h1>Create new Post</h1>
+			<SimpleMdeEditor
+				value={value}
+				onChange={onChange}
+				options={autofocusNoSpellcheckerOptions} />
+			<S.EditorFooter>
+				<S.OptionsContainer>
+					<strong>Options</strong>
+					<S.Options>
+						<S.Option>
+							<input type='checkbox' name='allowComments' id='allowComments'/>
+							<label htmlFor='allowComments'>Allow Comments?</label>
+						</S.Option>
+					</S.Options>
+				</S.OptionsContainer>
+				<Button>
           Post
-					</Button>
-				</S.EditorFooter>
-			</S.Container>
-		</>
+				</Button>
+			</S.EditorFooter>
+		</S.Container>
 	);
 }
