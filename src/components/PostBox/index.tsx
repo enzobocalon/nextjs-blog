@@ -12,7 +12,6 @@ const SimpleMdeEditor = dynamic(
 
 export default function PostBox() {
 	const [value, setValue] = useState('**Hello world!!!**');
-	console.log(value);
 
 	const onChange = useCallback((value: string) => {
 		setValue(value);
@@ -32,6 +31,15 @@ export default function PostBox() {
 				onChange={onChange}
 				options={autofocusNoSpellcheckerOptions} />
 			<S.EditorFooter>
+				<S.OptionsContainer>
+					<strong>Options</strong>
+					<S.Options>
+						<S.Option>
+							<input type='checkbox' name='allowComments' id='allowComments'/>
+							<label htmlFor='allowComments'>Allow Comments?</label>
+						</S.Option>
+					</S.Options>
+				</S.OptionsContainer>
 				<Button>
           Post
 				</Button>
