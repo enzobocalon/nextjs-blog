@@ -11,7 +11,7 @@ export default function Form({isLogin}: Props) {
 	return (
 		<S.Container>
 			<S.Form>
-				<h1>Welcome Back!</h1>
+				<h1>{isLogin ? 'Welcome Back' : 'Sign Up!'}</h1>
 				{
 					!isLogin && (
 						<S.FieldContainer>
