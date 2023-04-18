@@ -25,6 +25,7 @@ export default function PostBox() {
 	return (
 		<S.Container>
 			<h1>Create new Post</h1>
+			<input type="text" placeholder="Post title" />
 			<SimpleMdeEditor
 				value={value}
 				onChange={onChange}

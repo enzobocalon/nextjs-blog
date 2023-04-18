@@ -5,19 +5,35 @@ export const Container = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   padding: 1rem;
-  height: calc(100vh - 80px - 2rem - 50px - 30px);
+  height: calc(100vh - 80px - 1rem - 50px - 30px);
 
-  > h1 {
-    margin-bottom: 1rem;
+  :has(.CodeMirror-fullscreen) {
+    > div:first-of-type, .EasyMDEContainer, .CodeMirror.cm-s-easymde.CodeMirror-wrap, .CodeMirror-scroll {
+      max-height: none;
+    }
   }
 
   > div:first-of-type, .EasyMDEContainer, .CodeMirror.cm-s-easymde.CodeMirror-wrap, .CodeMirror-scroll {
     height: 100%;
-    max-height: 600px;
+    max-height: 550px;
+  }
+
+  .CodeMirror-fullscreen {
+    height: 100vh;
   }
 
   .editor-toolbar {
     background-color: white;
+  }
+
+  > input {
+    width: 100%;
+    margin-block: 1rem;
+    padding: .5rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    outline: none;
   }
 `;
 
@@ -34,6 +50,7 @@ export const EditorFooter = styled.div`
 `;
 
 export const OptionsContainer = styled.div`
+  flex: 1;
   strong {
     display: block;
     color: ${({theme}) => theme.lightGray};
