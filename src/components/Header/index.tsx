@@ -31,9 +31,11 @@ export default function Header() {
 							exit={{opacity: 0}}
 							transition={{duration: .3}}>
 							<S.Navbar>
-								<S.NavItems>
+								<Link href={'/'}>
+									<S.NavItems>
                   Blog
-								</S.NavItems>
+									</S.NavItems>
+								</Link>
 								<S.NavItems disabled>
                   Teams
 								</S.NavItems>
