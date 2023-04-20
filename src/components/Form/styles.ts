@@ -60,3 +60,8 @@ export const FieldContainer = styled.div`
     border-bottom: 2px solid ${({theme}) => theme.darkGray};
   }
 `;
+
+export const Error = styled.p`
+  margin-top: .5rem;
+  color: #FF3333;
+`;
