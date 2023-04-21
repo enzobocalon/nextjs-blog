@@ -5,6 +5,8 @@ import * as S from './styles';
 import { useForm } from 'react-hook-form';
 import isEmailValid from '@/utils/isEmailValid';
 import { error } from 'console';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 interface Props {
   isLogin?: boolean;
@@ -24,10 +26,20 @@ export default function Form({isLogin}: Props) {
 			'password': ''
 		}
 	});
-	console.log(errors);
 
-	function onSubmit(data: FormValues) {
-		console.log(data);
+	async function onSubmit(data: FormValues) {
+		try {
+			if (!isLogin) {
+				await axios.post('/api/auth/signup', {
+					name: data.name,
+					email: data.email,
+					password: data.password
+				});
+				toast.success('User created successfully');
+			}
+		} catch (error) {
+			toast.error(error.response.data.message || 'Error on creating user!');
+		}
 	}
 	return (
 		<S.Container>
