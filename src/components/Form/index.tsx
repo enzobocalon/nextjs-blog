@@ -1,12 +1,14 @@
+import * as S from './styles';
+import axios from 'axios';
 import Link from 'next/link';
+import Loader from '../Loader';
+import isEmailValid from '@/utils/isEmailValid';
 import { Button } from '../Button';
 import { Input } from '../Input';
-import * as S from './styles';
 import { useForm } from 'react-hook-form';
-import isEmailValid from '@/utils/isEmailValid';
-import { error } from 'console';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 interface Props {
   isLogin?: boolean;
@@ -18,8 +20,9 @@ type FormValues = {
   password: string;
 }
 
-export default function Form({isLogin}: Props) {
-	const {register, handleSubmit, formState: { errors }} = useForm<FormValues>({
+export default function Form({ isLogin }: Props) {
+	const router = useRouter();
+	const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
 		defaultValues: {
 			'name': '',
 			'email': '',
@@ -36,9 +39,25 @@ export default function Form({isLogin}: Props) {
 					password: data.password
 				});
 				toast.success('User created successfully');
+			} else {
+				const hasLoggedIn = await signIn('credentials', {
+					redirect: false,
+					email: data.email,
+					password: data.password,
+				});
+				if (hasLoggedIn?.status === 200) {
+					toast.success('Logged. Redirecting...');
+					router.push('/');
+				} else {
+					throw new Error(hasLoggedIn?.error);
+				}
 			}
 		} catch (error) {
-			toast.error(error.response.data.message || 'Error on creating user!');
+			if (!isLogin) {
+				toast.error(error.response.data.message || 'Error on creating user!');
+			} else {
+				toast.error(error.message || 'Error on logging in!');
+			}
 		}
 	}
 	return (
