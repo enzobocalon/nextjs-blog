@@ -53,11 +53,8 @@ export default function Form({ isLogin }: Props) {
 				}
 			}
 		} catch (error) {
-			if (!isLogin) {
-				toast.error(error.response.data.message || 'Error on creating user!');
-			} else {
-				toast.error(error.message || 'Error on logging in!');
-			}
+			const errorMessage = !isLogin ? error.response.data.message || 'Error on creating user!' : error.message || 'Error on logging in!';
+			toast.error(errorMessage);
 		}
 	}
 	return (
