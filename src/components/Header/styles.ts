@@ -16,7 +16,7 @@ export const Container = styled.header`
   justify-content: space-between;
   position: relative;
 
-  svg {
+  > svg {
     display: none;
   }
 
@@ -51,7 +51,6 @@ export const Wrapper = styled(motion.div)`
 `;
 
 export const Navbar = styled.nav`
-  width: 100%;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -106,6 +105,10 @@ export const HeaderActions = styled.div`
   align-items: center;
   gap: 1rem;
 
+  > p {
+    letter-spacing: .04em;
+  }
+
   @media (max-width: 768px) {
     flex-direction: column;
     justify-content: center;
@@ -113,4 +116,18 @@ export const HeaderActions = styled.div`
     border-top: 2px solid ${({theme}) => theme.darkGray};
   }
 
+`;
+
+export const SvgItem = styled.div`
+  cursor: pointer;
+
+  > svg {
+    transition: all .3s ease;
+  }
+
+  :hover {
+    > svg {
+      color: ${({theme}) => theme.blue};
+    }
+  }
 `;
