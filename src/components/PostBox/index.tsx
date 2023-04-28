@@ -4,6 +4,7 @@ import 'easymde/dist/easymde.min.css';
 
 import dynamic from 'next/dynamic';
 import { Button } from '../Button';
+import { Input } from '../Input';
 const SimpleMdeEditor = dynamic(
 	() => import('react-simplemde-editor'),
 	{ ssr: false }
@@ -25,7 +26,9 @@ export default function PostBox() {
 	return (
 		<S.Container>
 			<h1>Create new Post</h1>
-			<input type="text" placeholder="Post title" />
+			<Input type="text" placeholder="Post title" />
+			<h2>Image Banner URL</h2>
+			<Input type="text" placeholder="Banner" />
 			<SimpleMdeEditor
 				value={value}
 				onChange={onChange}

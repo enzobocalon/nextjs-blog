@@ -15,7 +15,7 @@ export const Container = styled.div`
 
   > div:first-of-type, .EasyMDEContainer, .CodeMirror.cm-s-easymde.CodeMirror-wrap, .CodeMirror-scroll {
     height: 100%;
-    max-height: 550px;
+    max-height: 500px;
   }
 
   .CodeMirror-fullscreen {
