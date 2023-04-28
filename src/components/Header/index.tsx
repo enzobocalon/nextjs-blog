@@ -63,7 +63,9 @@ export default function Header() {
 										{
 											['AUTHOR', 'ADMIN'].includes(session.role) && (
 												<S.SvgItem>
-													<MdPostAdd size={24} />
+													<Link href={'/posts/create'}>
+														<MdPostAdd size={24} />
+													</Link>
 												</S.SvgItem>
 											)
 										}
