@@ -68,6 +68,7 @@ model Post {
   id              String    @id @default(cuid())
   author          User      @relation(fields: [authorId], references: [id])
   authorId        String
+  banner          String?
   allowComments   Boolean   @default(true)
   comments        Comment[]
   createdAt       DateTime  @default(now())

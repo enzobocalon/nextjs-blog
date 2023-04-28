@@ -72,4 +72,3 @@ export const Option = styled.div`
     letter-spacing: .02em;
   }
 `;
-
