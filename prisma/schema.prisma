@@ -66,7 +66,9 @@ model VerificationRequest {
 
 model Post {
   id              String    @id @default(cuid())
+  title           String
   author          User      @relation(fields: [authorId], references: [id])
+  content         String
   authorId        String
   banner          String?
   allowComments   Boolean   @default(true)
@@ -78,6 +80,7 @@ model Post {
 model Comment {
   id              String    @id @default(cuid())
   author          User      @relation(fields: [authorId], references: [id])
+  content         String
   authorId        String
   post            Post      @relation(fields:[postId], references: [id])
   postId          String

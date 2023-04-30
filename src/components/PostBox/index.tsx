@@ -6,12 +6,15 @@ import dynamic from 'next/dynamic';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { toast } from 'react-toastify';
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
 const SimpleMdeEditor = dynamic(
 	() => import('react-simplemde-editor'),
 	{ ssr: false }
 );
 
 export default function PostBox() {
+	const { data: session } = useSession();
 	const [value, setValue] = useState('**Hello world!!!**');
 	const [postTitle, setPostTitle] = useState('');
 	const [imageBanner, setImageBanner] = useState('');
@@ -29,13 +32,24 @@ export default function PostBox() {
 		};
 	}, []);
 
-	function createPost() {
+	async function createPost() {
 		if (!postTitle || !value) {
 			toast.error('Title or content cannot be empty');
 			return;
 		}
 
-		// create request
+		try {
+			await axios.post('/api/posts/post', {
+				title: postTitle,
+				banner: imageBanner,
+				allowComments: allowedComments,
+				content: value
+			});
+
+			toast.success('Post created successfully');
+		} catch (error) {
+			toast.error(error.response.data.message);
+		}
 	}
 
 	return (
