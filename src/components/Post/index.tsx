@@ -1,7 +1,12 @@
 import * as S from './styles';
 import placeholder from '../../assets/newsPlaceholder.jpg';
+import IPost from '@/types/Post';
 
-export default function Post() {
+interface IProps {
+  post: IPost
+}
+
+export default function Post({post}: IProps) {
 	return (
 		<S.Container>
 			<S.HeaderContainer>
@@ -9,9 +14,9 @@ export default function Post() {
 					<img src={placeholder.src} />
 				</S.ImageContainer>
 				<S.HeaderInfo>
-					<p>Team fulano</p>
+					<p>{post.author.name}</p>
 					<p>Published on date</p>
-					<h1>Lorem ipsum dolor, sit amet consectetur adipisicing</h1>
+					<h1>{post.title}</h1>
 					<h2>Description</h2>
 				</S.HeaderInfo>
 			</S.HeaderContainer>

@@ -8,7 +8,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const post = await prisma.post.findUnique({
 		where: {
-			id: id as string
+			id: id as string,
+		},
+		include: {
+			author: {
+				select: {
+					id: true,
+					name: true,
+				}
+			}
 		}
 	});
 
