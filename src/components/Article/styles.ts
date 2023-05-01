@@ -9,9 +9,24 @@ export const ArticleContainer = styled.article<Props>`
   max-height: 200px;
   margin-block: 1rem;
   gap: 1rem;
-  border-top: 2px solid ${({theme}) => theme.lightGray};
   padding-block: 1rem;
   overflow: hidden;
+  cursor: pointer;
+  
+
+  h1 {
+    transition: all .3s ease;
+  }
+
+  :hover {
+      h1 {
+        color: ${({theme}) => theme.blue};
+      }
+    }
+
+  :not(:first-of-type) {
+    border-top: 2px solid ${({theme}) => theme.lightGray};
+  }
 
   ${({major}) => major && css`
     width: 100%;
@@ -61,7 +76,18 @@ export const Title = styled.div`
 
 export const Description = styled.div`
   justify-self: center;
-  h2 {
-    font-size: 1.1rem;
+  width: 100%;
+
+  > a {
+    display: block;
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    text-align: center;
+    transition: all .3s ease;
+
+    :hover {
+      color: ${({theme}) => theme.blue};
+    }
   }
+
 `;

@@ -1,27 +1,33 @@
 import * as S from './styles';
 import placeholder from '../../assets/newsPlaceholder.jpg';
+import IPost from '@/types/Post';
+import parseDate from '@/utils/parseDate';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface Props {
   major?: boolean;
+  post: IPost
 }
 
-export default function Article({major}: Props) {
+export default function Article({major, post}: Props) {
+	const router = useRouter();
 	return (
-		<S.ArticleContainer major={major}>
+		<S.ArticleContainer major={major} onClick={() => router.push(`/posts/${post.id}`)}>
 			<S.ImageContainer>
-				<img src={placeholder.src} alt='placeholder'/>
+				<img src={post.banner || placeholder.src} alt='placeholder'/>
 			</S.ImageContainer>
 			<S.InfoContainer>
 				<S.HeaderInfo>
-					<p>Autor</p>
-					<p>Date</p>
+					<p>{post.author.name}</p>
+					<p>{parseDate(post.createdAt)}</p>
 				</S.HeaderInfo>
 
 				<S.Title>
-					<h1>TITULO</h1>
+					<h1>{post.title}</h1>
 				</S.Title>
 				<S.Description>
-					<h2>Description</h2>
+					<Link href={`posts/${post.id}`}>Read more</Link>
 				</S.Description>
 			</S.InfoContainer>
 		</S.ArticleContainer>
