@@ -10,11 +10,10 @@ interface IProps {
 }
 
 export default function Posts({post}: IProps) {
-
 	return (
 		<>
 			<Head>
-				<title>Posts</title>
+				<title>{post.title}</title>
 			</Head>
 			<RootLayout>
 				<Post post={post}/>
@@ -25,12 +24,24 @@ export default function Posts({post}: IProps) {
 
 export async function getServerSideProps(context:GetServerSidePropsContext) {
 	const { id } = context.query;
-	const post = await axios.get(`http://localhost:3000/api/posts/get/${id}`);
 
+	try {
+		const post = await axios.get(`http://localhost:3000/api/posts/get/${id}`);
 
-	return {
-		props: {
-			post: post.data
-		},
-	};
+		return {
+			props: {
+				post: post.data
+			},
+		};
+	} catch (error) {
+		if (error.response && error.response.status === 404) {
+			context.res.writeHead(302, {
+				Location: '/404',
+			});
+			context.res.end();
+			return { props: {} };
+		}
+		throw error;
+	}
+
 }

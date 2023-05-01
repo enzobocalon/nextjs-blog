@@ -20,6 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		}
 	});
 
+
 	if (!post) {
 		res.status(404).json({
 			message: 'Post not found'
