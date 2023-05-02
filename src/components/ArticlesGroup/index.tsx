@@ -30,7 +30,7 @@ export default function ArticlesGroup({fetchedPosts, count}: Post) {
 		setCurrentPage(event.selected + 1);
 		setPosts([]);
 		try {
-			const response = await axios.get(`http://localhost:3000/api/posts/get?page=${event.selected + 2}`);
+			const response = await axios.get(`http://localhost:3000/api/posts/get?page=${event.selected + 1}`);
 			const page = response.data;
 
 			setPosts(page.posts);
