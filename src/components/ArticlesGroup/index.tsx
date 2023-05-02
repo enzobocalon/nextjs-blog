@@ -8,7 +8,6 @@ import axios from 'axios';
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import Loader from '../Loader';
-import { useRouter } from 'next/router';
 
 type Post = {
   fetchedPosts: IPost[];
@@ -23,7 +22,6 @@ export default function ArticlesGroup({fetchedPosts, count}: Post) {
 	const [posts, setPosts] = useState<IPost[]>(fetchedPosts);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
-	const router = useRouter();
 
 	const handlePageChange = useCallback(async (event: PaginationEvent) => {
 		setIsLoading(true);
