@@ -121,12 +121,12 @@ export const HeaderActions = styled.div`
 export const SvgItem = styled.div`
   cursor: pointer;
 
-  > svg {
+  > svg, > a svg {
     transition: all .3s ease;
   }
 
   :hover {
-    > svg {
+    > svg, > a svg {
       color: ${({theme}) => theme.blue};
     }
   }
