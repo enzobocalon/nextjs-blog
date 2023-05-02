@@ -3,6 +3,7 @@ import placeholder from '../../assets/newsPlaceholder.jpg';
 import IPost from '@/types/Post';
 import parseDate from '@/utils/parseDate';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import CommentaryGroup from '../CommentaryGroup';
 
 interface IProps {
   post: IPost
@@ -26,6 +27,8 @@ export default function Post({post}: IProps) {
 				<ReactMarkdown>
 					{post.content}
 				</ReactMarkdown>
+
+				<CommentaryGroup postId={post.id}/>
 			</S.BodyContainer>
 		</S.Container>
 	);
