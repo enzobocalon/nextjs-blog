@@ -37,3 +37,8 @@ export const StyledTextarea = styled.textarea`
   font-size: 1rem;
   min-height: 325px;
 `;
+
+export const Error = styled.p`
+  margin-top: .5rem;
+  color: #FF3333;
+`;
