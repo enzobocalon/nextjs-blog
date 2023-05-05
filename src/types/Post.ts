@@ -11,4 +11,5 @@ export default interface IPost {
   createdAt: string;
   updatedAt: string;
   author: IUser;
+  allowComments: boolean;
 };
