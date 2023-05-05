@@ -39,7 +39,7 @@ export default function PostBox() {
 		}
 
 		try {
-			await axios.post('/api/posts/post', {
+			await axios.post('/api/posts/create', {
 				title: postTitle,
 				banner: imageBanner,
 				allowComments: allowedComments,
