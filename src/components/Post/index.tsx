@@ -20,7 +20,6 @@ export default function Post({post}: IProps) {
 					<p>{post.author.name}</p>
 					<p>Published on {parseDate(post.createdAt)}</p>
 					<h1>{post.title}</h1>
-					{/* <h2>Description</h2> */}
 				</S.HeaderInfo>
 			</S.HeaderContainer>
 			<S.BodyContainer>
@@ -28,7 +27,13 @@ export default function Post({post}: IProps) {
 					{post.content}
 				</ReactMarkdown>
 
-				<CommentaryGroup postId={post.id}/>
+				{
+					post.allowComments ? (
+						<CommentaryGroup postId={post.id}/>
+					) : (
+						<p style={{textAlign: 'center', marginTop: 16}}>Comments are disabled</p>
+					)
+				}
 			</S.BodyContainer>
 		</S.Container>
 	);

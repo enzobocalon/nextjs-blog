@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import * as S from './styles';
 import { Button } from '../Button';
 import Comment from '../Comment';
+import Modal from '../Modal';
+import CreateComment from '../CreateComment';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 interface Props {
   postId: string;
@@ -9,10 +13,13 @@ interface Props {
 
 export default function CommentaryGroup({ postId }: Props) {
 	const [comments, setComments] = useState<number[]>([]);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const { data: session } = useSession();
 
 	async function handleComments() {
 		console.log(postId);
-		// temp
+
 		setComments(prev => {
 			return [
 				...prev,
@@ -21,6 +28,10 @@ export default function CommentaryGroup({ postId }: Props) {
 		});
 	}
 
+	const handleModal = useCallback(() => {
+		setIsModalOpen(prev => !prev);
+	}, []);
+
 	return (
 		<S.Container>
 			{
@@ -28,9 +39,18 @@ export default function CommentaryGroup({ postId }: Props) {
 					<p className='load' onClick={handleComments}>Load comments</p>
 				) : (
 					<>
+						<Modal open={isModalOpen}>
+							<CreateComment postId={postId} handleModal={handleModal}/>
+						</Modal>
 						<S.GroupHeader>
 							<h1>Comments</h1>
-							<Button>Create Comment</Button>
+							{
+								!session ? (
+									<p>You must be <Link href={'/login'}>signed in</Link> to reply this post</p>
+								) : (
+									<Button onClick={() => setIsModalOpen((prev) => !prev)}>Create Comment</Button>
+								)
+							}
 						</S.GroupHeader>
 						<Comment />
 					</>

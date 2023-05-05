@@ -21,6 +21,14 @@ export const GroupHeader = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  > p {
+    color: ${({theme}) => theme.darkGray};
+
+    a {
+      color: ${({theme}) => theme.blue};
+    }
+  }
+
   button {
     width: 100%;
     max-width: 250px;
