@@ -6,17 +6,17 @@ import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 
 interface IProps {
-  post: IPost
+  postContent: IPost
 }
 
-export default function Posts({post}: IProps) {
+export default function Posts({postContent}: IProps) {
 	return (
 		<>
 			<Head>
-				<title>{post.title}</title>
+				<title>{postContent.title}</title>
 			</Head>
 			<RootLayout>
-				<Post post={post}/>
+				<Post post={postContent}/>
 			</RootLayout>
 		</>
 	);
@@ -30,7 +30,7 @@ export async function getServerSideProps(context:GetServerSidePropsContext) {
 
 		return {
 			props: {
-				post: post.data
+				postContent: post.data
 			},
 		};
 	} catch (error) {
