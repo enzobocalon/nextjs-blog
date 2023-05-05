@@ -6,26 +6,35 @@ import Modal from '../Modal';
 import CreateComment from '../CreateComment';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import IComment from '@/types/Comment';
+import Loader from '../Loader';
 
 interface Props {
   postId: string;
 }
 
 export default function CommentaryGroup({ postId }: Props) {
-	const [comments, setComments] = useState<number[]>([]);
+	const [comments, setComments] = useState<IComment[]>([]);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const { data: session } = useSession();
 
 	async function handleComments() {
-		console.log(postId);
+		try {
+			setIsLoading(true);
+			const data = await axios.get(`/api/comments/get?id=${postId}`);
 
-		setComments(prev => {
-			return [
-				...prev,
-				1
-			];
-		});
+			if (!data || !data.data) throw new Error();
+
+			setComments(data.data);
+		} catch (error) {
+			toast.error(error.response.data.message || 'Failed to get comments');
+		} finally {
+			setIsLoading(false);
+		}
 	}
 
 	const handleModal = useCallback(() => {
@@ -35,7 +44,11 @@ export default function CommentaryGroup({ postId }: Props) {
 	return (
 		<S.Container>
 			{
-				comments.length === 0 ? (
+				isLoading ? (
+					<S.LoaderContainer>
+						<Loader />
+					</S.LoaderContainer>
+				) : !comments.length ? (
 					<p className='load' onClick={handleComments}>Load comments</p>
 				) : (
 					<>
@@ -52,7 +65,11 @@ export default function CommentaryGroup({ postId }: Props) {
 								)
 							}
 						</S.GroupHeader>
-						<Comment />
+						{
+							comments.map((commentData: IComment) => (
+								<Comment key={commentData.id} commentData={commentData}/>
+							))
+						}
 					</>
 				)
 			}

@@ -1,14 +1,20 @@
+import IComment from '@/types/Comment';
 import * as S from './styles';
+import parseDate from '@/utils/parseDate';
 
-export default function Comment() {
+interface Props {
+  commentData: IComment
+}
+
+export default function Comment({commentData}: Props) {
 	return (
 		<S.Container>
 			<S.Author>
-				<strong>Author</strong>
+				<strong>{commentData.author.name}</strong>
 			</S.Author>
-			<p>Published on 11/11/1111</p>
+			<p>Published on {parseDate(commentData.createdAt)}</p>
 			<S.CommentBody>
-        asdasd
+				{commentData.content}
 			</S.CommentBody>
 		</S.Container>
 	);
