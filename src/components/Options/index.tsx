@@ -12,6 +12,11 @@ interface Props {
 export default function Options({onDelete}: Props) {
 	const [openModal, setOpenModal] = useState(false);
 
+	function handleDelete() {
+		setOpenModal(false);
+		onDelete();
+	}
+
 	function handleModal() {
 		setOpenModal(prev => !prev);
 	}
@@ -29,7 +34,7 @@ export default function Options({onDelete}: Props) {
 					<strong>Are you sure you want to delete this comment?</strong>
 
 					<div>
-						<Button onClick={onDelete}>Yes, delete now!</Button>
+						<Button onClick={handleDelete}>Yes, delete now!</Button>
 						<p onClick={() => setOpenModal(false)}>Cancel</p>
 					</div>
 				</S.ModalBackground>

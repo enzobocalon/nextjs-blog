@@ -23,11 +23,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		where: {
 			postId: id as string,
 		},
-		select: {
-			id: true,
-			author: true,
-			content: true,
-			createdAt: true
+		include: {
+			post: {
+				select: {
+					authorId: true
+				}
+			},
+			author: {
+				select: {
+					name: true
+				}
+			}
 		}
 	});
 

@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function CommentaryGroup({ postId }: Props) {
-	const [comments, setComments] = useState<IComment[]>([]);
+	const [comments, setComments] = useState<IComment[] | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -48,7 +48,7 @@ export default function CommentaryGroup({ postId }: Props) {
 					<S.LoaderContainer>
 						<Loader />
 					</S.LoaderContainer>
-				) : !comments.length ? (
+				) : !comments ? (
 					<p className='load' onClick={handleComments}>Load comments</p>
 				) : (
 					<>

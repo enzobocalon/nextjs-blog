@@ -9,7 +9,9 @@ export default interface IComment{
   author: IUser;
   content: string;
   authorId: string;
-  post: IPost;
+  post: IPost & {
+    authorId: string
+  };
   postId: string;
   createdAt: string
 }
