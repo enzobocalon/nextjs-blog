@@ -24,6 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			postId: id as string,
 		},
 		select: {
+			id: true,
 			author: true,
 			content: true,
 			createdAt: true
