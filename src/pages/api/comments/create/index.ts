@@ -46,6 +46,13 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
 			content,
 			postId: id as string,
 			authorId: user.id
+		},
+		include: {
+			author: {
+				select: {
+					name: true
+				}
+			}
 		}
 	});
 
@@ -57,7 +64,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
 	}
 
 	res.status(201).json({
-		message: 'Comment created successfully'
+		message: 'Comment created successfully',
+		comment,
 	});
 	return;
 
