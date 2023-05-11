@@ -15,6 +15,29 @@ export const HeaderContainer = styled.div`
   }
 `;
 
+export const PostActions = styled.div`
+  position: absolute;
+  top: 12px;
+  right: 24px;
+  z-index: 999;
+  cursor: pointer;
+
+  > svg {
+    transition: all .3s ease;
+
+    :hover {
+      color: ${({theme}) => theme.lightGray};
+    }
+  }
+`;
+
+export const ActionsContainer = styled.div`
+  div {
+    right: 8px;
+    top: 28px;
+  }
+`;
+
 export const ImageContainer = styled.div`
   ::before {
       content: '';
@@ -64,8 +87,11 @@ export const BodyContainer = styled.div`
     padding: 1rem;
     margin: 0 auto;
 
-    p {
+    > * {
       line-height: 1.5rem;
+      :not(:first-child) {
+        margin-block: 1rem;
+      }
     }
 `;
 

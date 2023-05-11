@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
+interface Props {
+  isPost?: boolean;
+}
+
 export const Container = styled(motion.div)`
   background-color: ${({theme}) => theme.darkGray};
   position: absolute;
@@ -8,9 +12,10 @@ export const Container = styled(motion.div)`
   top: 40px;
   padding: .5rem;
   border-radius: .4rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `;
 
-export const Options = styled.div`
+export const Options = styled.div<Props>`
   display: flex;
   align-items: center;
   gap: .25rem;
@@ -22,9 +27,13 @@ export const Options = styled.div`
     transition: color .3s ease;
   }
 
+  :not(:first-of-type) {
+    margin-top: .5rem;
+  }
+
   :hover {
     > * {
-      color: #dc3545;
+      color: ${({isPost, theme}) => isPost ? theme.blue : '#dc3545'};
     }
   }
 `;

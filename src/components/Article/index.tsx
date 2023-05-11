@@ -26,9 +26,6 @@ export default function Article({major, post}: Props) {
 				<S.Title>
 					<h1>{post.title}</h1>
 				</S.Title>
-				<S.Description>
-					<Link href={`posts/${post.id}`}>Read more</Link>
-				</S.Description>
 			</S.InfoContainer>
 		</S.ArticleContainer>
 	);

@@ -12,7 +12,7 @@ export const ArticleContainer = styled.article<Props>`
   padding-block: 1rem;
   overflow: hidden;
   cursor: pointer;
-  
+
 
   h1 {
     transition: all .3s ease;
@@ -71,23 +71,4 @@ export const HeaderInfo = styled.div`
 
 export const Title = styled.div`
   margin-block: 1rem;
-  justify-items: center;
-`;
-
-export const Description = styled.div`
-  justify-self: center;
-  width: 100%;
-
-  > a {
-    display: block;
-    margin-top: 1rem;
-    font-size: 1.05rem;
-    text-align: center;
-    transition: all .3s ease;
-
-    :hover {
-      color: ${({theme}) => theme.blue};
-    }
-  }
-
 `;

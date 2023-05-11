@@ -4,7 +4,7 @@ import parseDate from '@/utils/parseDate';
 
 import { MdMoreVert } from 'react-icons/md';
 import Options from '../Options';
-import { useCallback, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { AnimatePresence } from 'framer-motion';
 import axios from 'axios';
@@ -12,10 +12,11 @@ import { toast } from 'react-toastify';
 
 interface Props {
   commentData: IComment
+  setComments: Dispatch<SetStateAction<IComment[] | null>>
 }
 
-export default function Comment({commentData}: Props) {
-	const {data: session} = useSession();
+export default function Comment({commentData, setComments}: Props) {
+	const { data: session } = useSession();
 	const [openOptions, setOpenOptions] = useState(false);
 
 	const handleDelete = useCallback(async () => {
@@ -23,11 +24,18 @@ export default function Comment({commentData}: Props) {
 			const data = await axios.delete(`/api/comments/delete?id=${commentData.id}`);
 
 			if (!data || !data.data) throw new Error();
+
+			setComments(prevComments => {
+				if (prevComments) {
+					return prevComments.filter(currentComment => currentComment.id !== commentData.id);
+				}
+				return prevComments;
+			});
 			toast.success('Comment deleted successfully');
 		} catch (error) {
 			toast.error(error.response.data.message || 'Failed to delete comment');
 		}
-	}, []);
+	}, [commentData.id, setComments]);
 
 	return (
 		<S.Container>

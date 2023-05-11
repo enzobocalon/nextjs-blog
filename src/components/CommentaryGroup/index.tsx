@@ -53,7 +53,7 @@ export default function CommentaryGroup({ postId }: Props) {
 				) : (
 					<>
 						<Modal open={isModalOpen}>
-							<CreateComment postId={postId} handleModal={handleModal}/>
+							<CreateComment postId={postId} handleModal={handleModal} setComments={setComments}/>
 						</Modal>
 						<S.GroupHeader>
 							<h1>Comments</h1>
@@ -67,7 +67,10 @@ export default function CommentaryGroup({ postId }: Props) {
 						</S.GroupHeader>
 						{
 							comments.map((commentData: IComment) => (
-								<Comment key={commentData.id} commentData={commentData}/>
+								<Comment
+									key={commentData.id}
+									commentData={commentData}
+									setComments={setComments}/>
 							))
 						}
 					</>
