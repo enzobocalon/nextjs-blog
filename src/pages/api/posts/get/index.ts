@@ -28,6 +28,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					name: true
 				}
 			}
+		},
+		orderBy: {
+			createdAt: 'desc'
 		}
 	});
 
