@@ -20,9 +20,7 @@ const options: NextAuthOptions = {
 				password: {label: 'Password'}
 			},
 			async authorize(credentials) {
-				if (!credentials) {
-					return null;
-				}
+				if (!credentials) return null;
 
 				if (!credentials.email || !credentials.password) {
 					throw new Error('Please provide the required data');
