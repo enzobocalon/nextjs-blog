@@ -1,7 +1,11 @@
 import * as S from './styles';
 
-export default function Loader() {
+interface Props {
+  small?: boolean;
+}
+
+export default function Loader({small}: Props) {
 	return (
-		<S.Loader />
+		<S.Loader small={small}/>
 	);
 }

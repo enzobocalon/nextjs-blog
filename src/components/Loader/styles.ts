@@ -1,4 +1,8 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+
+interface Props {
+  small?: boolean;
+}
 
 const rotation = keyframes`
     0% {
@@ -9,7 +13,7 @@ const rotation = keyframes`
     }
 `;
 
-export const Loader = styled.span`
+export const Loader = styled.span<Props>`
     width: 48px;
     height: 48px;
     border: 5px solid #FFF;
@@ -18,4 +22,9 @@ export const Loader = styled.span`
     display: inline-block;
     box-sizing: border-box;
     animation: ${rotation} 1s linear infinite;
+
+    ${({small}) => small && css`
+      width: 16px;
+      height: 16px;
+    `}
 `;
