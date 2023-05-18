@@ -20,6 +20,7 @@ export default function Post({post}: IProps) {
 	const {data: session} = useSession();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const router = useRouter();
+
 	const handleEdit = useCallback(() => {
 		router.push(`/posts/create?edit=true&id=${post.id}`);
 	}, [post.id, router]);
