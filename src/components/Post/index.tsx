@@ -59,7 +59,7 @@ export default function Post({post}: IProps) {
 					)
 				}
 				<S.ImageContainer>
-					<img src={placeholder.src} />
+					<img src={post.banner || placeholder.src} />
 				</S.ImageContainer>
 				<S.HeaderInfo>
 					<p>{post.author.name}</p>
