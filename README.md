@@ -3,8 +3,9 @@ This is a project built using NextJS and TypeScript with the main goal to create
 The project also includes a comment section in which users can comment if the post has the comments enabled.
 
 ## Project Status
-The project main structure is currently developed and can be used by users. However, the project still needs a refactor - is in TODO phase.
-So, the Blog needs some work to improve code writing, like middlewares, custom hooks, could also use some mappers.
+The project main structure is currently developed and can be used by users. However, the project still needs a refactor and some codes improvements - TODO. <br/>
+It was a really good project to study prisma library and handle with database relationships.
+
 
 ## Dependencies
 - NextJS
@@ -20,12 +21,12 @@ So, the Blog needs some work to improve code writing, like middlewares, custom h
 - Framer Motion
 
 ## TODO
-[ ] Add middlewares - remove repetitive verifications in each route
-[ ] Improve error handling - especially in backend with prisma requests
-[ ] Custom hooks to handle some repetitive logic
-[ ] Create services - Mappers/HTTPClients etc
-[ ] Improve and add new animations
-[ ] Improve CSS - Styled Components styling
+[ ] Add middlewares - remove repetitive verifications in each route <br/>
+[ ] Improve error handling - especially in backend with prisma requests <br/>
+[ ] Custom hooks to handle some repetitive logic <br/>
+[ ] Create services - Mappers/HTTPClients etc <br/>
+[ ] Improve and add new animations <br/>
+[ ] Improve CSS - Styled Components styling <br/>
 
 I'll be working in this project whenever I have free time to try to accomplish the TODO list.
 ## How to run the project
@@ -40,8 +41,8 @@ $ yarn install
 ```
 You can now create a .env file inside the project root folder with the following data
 
-DATABASE_URL="YOUR POSTGRES DATABASE URL/IP"
-DB_PASSWORD = "YOUR DB PASSWORD"
+DATABASE_URL="YOUR POSTGRES DATABASE URL/IP" <br/>
+DB_PASSWORD = "YOUR DB PASSWORD" <br/>
 NEXTAUTH_URL = `The URL that your project is running, by default is http://localhost:3000` <br/>
 JWT_SECRET = `Your JWT secret` <br/>
 
