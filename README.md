@@ -41,8 +41,8 @@ $ yarn install
 ```
 You can now create a .env file inside the project root folder with the following data
 
-DATABASE_URL="YOUR POSTGRES DATABASE URL/IP" <br/>
-DB_PASSWORD = "YOUR DB PASSWORD" <br/>
+DATABASE_URL=`YOUR POSTGRES DATABASE URL/IP` <br/>
+DB_PASSWORD = `YOUR DB PASSWORD` <br/>
 NEXTAUTH_URL = `The URL that your project is running, by default is http://localhost:3000` <br/>
 JWT_SECRET = `Your JWT secret` <br/>
 
