@@ -7,10 +7,11 @@ import { Button } from '../Button';
 
 interface Props {
   onDelete: () => void;
+  onEdit: () => void;
   isPost?: boolean
 }
 
-export default function Options({onDelete, isPost}: Props) {
+export default function Options({onDelete, onEdit, isPost}: Props) {
 	const [openModal, setOpenModal] = useState(false);
 
 	function handleDelete() {
@@ -26,7 +27,7 @@ export default function Options({onDelete, isPost}: Props) {
 			<S.Container initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
 				{
 					isPost && (
-						<S.Options onClick={handleModal} isPost>
+						<S.Options onClick={onEdit} isPost>
 							<MdEdit size={20}/>
 							<span>Edit</span>
 						</S.Options>

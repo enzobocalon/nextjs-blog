@@ -3,27 +3,20 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getToken } from 'next-auth/jwt';
 const secret = process.env.JWT_SECRET;
 
-export default async function handler (req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	if (req.method !== 'DELETE') {
+		res.json({message: 'Invalid method'});
+	}
+
+
 	const token = await getToken({ req, secret });
+	const { id } = req.query;
+
+	if (!id) return;
 
 	if (!token) {
 		res.status(401).json({
 			message: 'Unauthorized access'
-		});
-		return;
-	}
-
-	const {
-		title,
-		banner,
-		allowComments,
-		content,
-	} = req.body;
-
-
-	if (!title || !content) {
-		res.status(422).json({
-			message: 'Post title and/or content is required'
 		});
 		return;
 	}
@@ -40,40 +33,48 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
 		}
 	});
 
-	if (!user) {
+	if (!user || !['ADMIN', 'AUTHOR'].includes(user.role)) {
 		res.status(401).json({
 			message: 'Unauthorized access'
 		});
 		return;
 	}
 
-	if (!['AUTHOR', 'ADMIN'].includes(user.role)) {
-		res.status(401).json({
-			message: 'Unauthorized access'
-		});
-		return;
-	}
-
-	const createdPost = await prisma.post.create({
-		data: {
-			title,
-			content,
-			allowComments,
-			banner: banner || null,
-			authorId: user.id
+	const post = await prisma.post.findUnique({
+		where: {
+			id: id as string,
 		}
 	});
 
-	if (!createdPost) {
+	if (!post) {
+		res.status(404).json({
+			message: 'Post not found'
+		});
+		return;
+	}
+
+	if (post.authorId !== user.id && user.role !== 'ADMIN') {
+		res.status(401).json({
+			message: 'Unauthorized access'
+		});
+		return;
+	}
+
+	const deletedPost = await prisma.post.delete({
+		where: {
+			id: id as string
+		}
+	});
+
+	if (!deletedPost) {
 		res.status(500).json({
-			message: 'Failed to create post'
+			message: 'Failed to delete post'
 		});
 		return;
 	}
 
 	res.status(201).json({
-		post: createdPost,
-		message: 'Post created successfully'
+		message: 'Post deleted successfully'
 	});
 	return;
 }

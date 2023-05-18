@@ -1,4 +1,4 @@
-import { useCallback, useState, useMemo } from 'react';
+import { useCallback, useState, useMemo, useEffect } from 'react';
 import * as S from './styles';
 import 'easymde/dist/easymde.min.css';
 
@@ -7,18 +7,31 @@ import { Button } from '../Button';
 import { Input } from '../Input';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { useSession } from 'next-auth/react';
+import IPost from '@/types/Post';
+import { useRouter } from 'next/router';
+import Loader from '../Loader';
 const SimpleMdeEditor = dynamic(
 	() => import('react-simplemde-editor'),
 	{ ssr: false }
 );
 
-export default function PostBox() {
-	const { data: session } = useSession();
-	const [value, setValue] = useState('**Hello world!!!**');
-	const [postTitle, setPostTitle] = useState('');
-	const [imageBanner, setImageBanner] = useState('');
-	const [allowedComments, setAllowedComments] = useState(true);
+interface Props {
+  post?: {
+    body: IPost | null,
+    error: string | null
+  }
+}
+
+export default function PostBox({ post }: Props) {
+	const [value, setValue] = useState(post?.body?.content ?? '');
+	const [postTitle, setPostTitle] = useState(post?.body?.title ?? '');
+	const [imageBanner, setImageBanner] = useState(post?.body?.banner ?? '');
+	const [allowedComments, setAllowedComments] = useState(post?.body?.allowComments ?? true);
+
+	const [isLoading, setIsLoading] = useState(false);
+
+	const router = useRouter();
+
 
 	const onChange = useCallback((value: string) => {
 		setValue(value);
@@ -39,18 +52,65 @@ export default function PostBox() {
 		}
 
 		try {
-			await axios.post('/api/posts/create', {
+			setIsLoading(true);
+			const createdPost = await axios.post('/api/posts/create', {
 				title: postTitle,
 				banner: imageBanner,
 				allowComments: allowedComments,
 				content: value
 			});
 
-			toast.success('Post created successfully');
+			toast.success(createdPost.data.message || 'Post created successfully');
+			router.push(`/posts/${createdPost.data.post.id}`);
 		} catch (error) {
 			toast.error(error.response.data.message);
+		} finally {
+			setIsLoading(false);
 		}
 	}
+
+	async function editPost() {
+		if (!postTitle || !value) {
+			toast.error('Title or content cannot be empty');
+			return;
+		}
+
+		try {
+			if (!post || !post.body) throw new Error('Invalid Post');
+			setIsLoading(true);
+			const updatedPost = await axios.post(`/api/posts/edit?id=${post.body.id}`, {
+				title: postTitle,
+				banner: imageBanner,
+				allowComments: allowedComments,
+				content: value
+			});
+
+			toast.success(updatedPost.data.message || 'Post updated successfully');
+			router.push(`/posts/${updatedPost.data.post.id}`);
+		} catch (error) {
+			toast.error(error.response.data.message);
+		} finally {
+			setIsLoading(false);
+		}
+	}
+
+	function handleSubmit() {
+		if (post) {
+			if (post.error) {
+				toast.error(post.error);
+				return;
+			}
+			editPost();
+			return;
+		}
+		createPost();
+	}
+
+	useEffect(() => {
+		if (post?.error) {
+			toast.error(post.error);
+		}
+	}, [post]);
 
 	return (
 		<S.Container>
@@ -85,8 +145,12 @@ export default function PostBox() {
 						</S.Option>
 					</S.Options>
 				</S.OptionsContainer>
-				<Button onClick={createPost}>
-          Post
+				<Button onClick={handleSubmit}>
+					{
+						isLoading ? (
+							<Loader small/>
+						) : 'Post'
+					}
 				</Button>
 			</S.EditorFooter>
 		</S.Container>

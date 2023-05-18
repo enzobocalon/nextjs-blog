@@ -55,11 +55,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
 		return;
 	}
 
-	console.log(comment.authorId !== user.id);
-	console.log(comment.post.authorId !== user.id);
-	console.log(user.role !== 'ADMIN');
-
-
 	if (comment.authorId !== user.id && comment.post.authorId !== user.id && user.role !== 'ADMIN') {
 		res.status(401).json({
 			message: 'Unauthorized access'
