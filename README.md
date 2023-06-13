@@ -1,10 +1,10 @@
 # NextJS Blog
 This is a project built using NextJS and TypeScript with the main goal to create a Blog that allows admins and authors to create and manage their posts.
-The project also includes a comment section in which users can comment if the post has the comments enabled.
+The project also includes a comment section in which users can reply, if the post has the comments enabled.
 
 ## Project Status
 The project main structure is currently developed and can be used by users. However, the project still needs a refactor and some codes improvements - TODO. <br/>
-It was a really good project to study prisma library and handle with database relationships.
+It was a really good project to study Prisma and handle database relationships.
 
 
 ## Dependencies
